@@ -1,0 +1,26 @@
+.loginField-container {
+    width: 100%;
+    height: 45px;
+    background-color: var(--main-inputField-background);
+    border-radius: 15px;
+    color: var(--main-text-color);
+    display: flex;
+    gap: 10px;
+}
+
+.loginField-container div {
+    width: 40px;
+    height: 100%;
+    border-right: 2px solid var(--main-inputField-border);
+    border-radius: 15px 0px 0px 15px;
+}
+
+.loginField-container input {
+    background-color: transparent;
+    font-size: 0.8em;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 15px 15px 0px;
+    outline: none;
+    border: 0px;
+}

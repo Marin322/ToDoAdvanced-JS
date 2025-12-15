@@ -1,4 +1,9 @@
 :root {
+    --main-text-color: #000000;
+    --second-text-color: #ffffff;
     --main-background: #ffffff;
     --second-background: #f8f8f8;
+    --main-inputField-background: #e0e0e0;
+    --main-inputField-border: #bdbdbd;
+    --main-button-color: #299ffac4;
 }
