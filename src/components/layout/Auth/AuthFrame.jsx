@@ -12,8 +12,8 @@ const AuthFrame = ({ isAuth, setIsAuth }) => {
   });
 
   const correctLoginData = {
-    login: "testAccount@example.com",
-    password: "123456",
+    login: "123",
+    password: "123",
   };
 
   const LoginFields = [
@@ -41,56 +41,90 @@ const AuthFrame = ({ isAuth, setIsAuth }) => {
 
   const enterAccount = async () => {
     if (loginData.login !== correctLoginData.login) {
+      alert("Неверный логин");
       return;
     }
     if (loginData.password !== correctLoginData.password) {
+      alert("Неверный пароль");
       return;
     }
+    
     setIsLoading(true);
     setShowSuccess(false);
+    setIsExiting(true); // Начинаем скрывать форму
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setShowSuccess(true);
-      setIsExiting(true)
-
+      // Ждем пока форма скроется (0.5 сек анимации)
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      
+      // Теперь показываем "Идет авторизация" по центру
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      localStorage.setItem("isAuth", true);
+      
+      setShowSuccess(true);
+      setIsLoading(false);
+
+      // Ждем пока покажется сообщение об успехе
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      
+      localStorage.setItem("isAuth", "true");
       setIsAuth(true);
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <div className={`${styles["AuthFrame-container"]} ${isExiting ? styles["exit-animation"] : ""}`}>
-      <p>Авторизация</p>
-      <div className={styles["AuthFrame-fields-container"]}>
-        {LoginFields.map((field) => {
-          return (
-            <LoginField
-              key={field.id}
-              placeholder={field.placeholder}
-              type={field.type}
-              onChange={handleChange}
-              name={field.name}
-              value={loginData[field.name]}
-            />
-          );
-        })}
+    <>
+      {/* Форма авторизации с анимацией исчезновения */}
+      <div 
+        className={`${styles["AuthFrame-container"]} ${
+          isExiting ? styles["exit-animation"] : ""
+        }`}
+        style={{
+          display: isExiting ? 'none' : 'block'
+        }}
+      >
+        <p>Авторизация</p>
+        <div className={styles["AuthFrame-fields-container"]}>
+          {LoginFields.map((field) => {
+            return (
+              <LoginField
+                key={field.id}
+                placeholder={field.placeholder}
+                type={field.type}
+                onChange={handleChange}
+                name={field.name}
+                value={loginData[field.name]}
+                disabled={isLoading}
+              />
+            );
+          })}
+        </div>
+        <button onClick={enterAccount} disabled={isLoading}>
+          {isLoading ? "Загрузка..." : "Войти"}
+        </button>
       </div>
-      {isLoading && (
-        <div className={styles["loading-container"]}>
-          <div className={styles["spinner"]}></div>
-          <p>Идет авторизация...</p>
-        </div>
-      )}
 
-      {showSuccess && (
-        <div className={styles["success-message"]}>
-          <p> ✓ Успешная авторизация </p>
+      {/* Индикаторы по центру экрана */}
+      {(isLoading || showSuccess) && (
+        <div className={styles["center-overlay"]}>
+          {isLoading && (
+            <div className={styles["center-loading"]}>
+              <div className={styles["spinner-large"]}></div>
+              <p className={styles["center-text"]}>Идет авторизация...</p>
+            </div>
+          )}
+          
+          {showSuccess && (
+            <div className={styles["center-success"]}>
+              <div className={styles["success-icon"]}>✓</div>
+              <p className={styles["center-text"]}>Добро пожаловать!</p>
+              <p className={styles["center-subtext"]}>Перенаправляем на главную страницу...</p>
+            </div>
+          )}
         </div>
       )}
-      <button onClick={enterAccount}>Войти</button>
-    </div>
+    </>
   );
 };
 

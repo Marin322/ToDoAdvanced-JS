@@ -1,3 +1,6 @@
+/* AuthFrame.module.css */
+
+/* Основной контейнер формы */
 .AuthFrame-container {
   width: 500px;
   height: 300px;
@@ -15,6 +18,8 @@
   opacity: 1;
   transform: translateY(0);
   overflow: hidden;
+  position: relative;
+  z-index: 10;
 }
 
 .AuthFrame-fields-container {
@@ -34,13 +39,163 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.3s;
 }
 
+.AuthFrame-container button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Анимация исчезновения формы */
 .exit-animation {
-  opacity: 0 !important;
-  transform: translateY(-30px) scale(0.95) !important;
-  height: 0;
-  padding: 0;
+  animation: hideForm 0.5s ease forwards !important;
+}
+
+@keyframes hideForm {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+  }
+}
+
+/* Оверлей для центрированных элементов */
+.center-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7); /* затемнение фона */
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Центрированный индикатор загрузки */
+.center-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+  background-color: var(--second-background);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Большой спиннер */
+.spinner-large {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid var(--main-button-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Центрированное сообщение об успехе */
+.center-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 50px;
+  background-color: var(--second-background);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.5s ease;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  animation: bounce 1s ease;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.center-text {
+  font-size: 1.8em;
+  color: var(--main-text-color);
+  font-weight: bold;
+  text-align: center;
   margin: 0;
-  pointer-events: none;
+}
+
+.center-subtext {
+  font-size: 1.1em;
+  color: var(--second-text-color);
+  opacity: 0.8;
+  text-align: center;
+  margin: 0;
 }

@@ -9,12 +9,12 @@ import MainPage from './pages/MainPage/MainPage'
 function App() {
   const [isAuth, setIsAuth] = useState(false)
 
-  // useEffect(() => {
-  //   const isLogin = localStorage.getItem('isAuth');
-  //   if (isLogin === "true") {
-  //     setIsAuth(true);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const isLogin = localStorage.getItem('isAuth');
+    if (isLogin === "true") {
+      setIsAuth(true);
+    }
+  }, []);
 
   return (
     <BrowserRouter>
