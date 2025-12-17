@@ -39,6 +39,9 @@
     justify-content: right;
     align-items: center;
     padding-right: 20px;
+    color: var(--main-text-color);
+    font-size: 1.3em;
+    gap: 10px;
 }
 
 .header-user-avatar {

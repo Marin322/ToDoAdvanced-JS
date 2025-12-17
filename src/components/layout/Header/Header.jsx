@@ -1,7 +1,7 @@
 import styles from "../../../styles/components/layout/Header/Header.module.css";
 const Header = () => {
   const maxExp = 100;
-  const currentExp = 45;
+  const currentExp = 0;
   return (
     <div className={styles["header-container"]}>
       <div className={styles["header-level-container"]}>
@@ -14,8 +14,8 @@ const Header = () => {
         <p>15 уровень</p>
       </div>
       <div className={styles["header-user-container"]}>
+        <p>Александр К.</p>
         <img className={styles["header-user-avatar"]}/>
-        <div></div>
       </div>
     </div>
   );

@@ -1,0 +1,13 @@
+.SideBarButton-container {
+    width: 100%;
+    height: 40px;
+    color: var(--main-text-color);
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+}

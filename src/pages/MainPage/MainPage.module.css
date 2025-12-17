@@ -1,4 +1,11 @@
 .mainPage-container {
     width: 100%;
     height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.mainPage-workspace {
+    width: 100%;
+    height: 100%;
 }
